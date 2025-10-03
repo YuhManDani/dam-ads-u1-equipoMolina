@@ -101,4 +101,5 @@ public class Reserva {
     public void setIdSocio(String idSocio) {
         this.idSocio = idSocio;
     }
+
 }

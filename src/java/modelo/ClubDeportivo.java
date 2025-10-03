@@ -84,12 +84,18 @@ public class ClubDeportivo {
                 // Aqui hacemos un boolean para ver si las pista a reservar estara ocupada
                 boolean ocupadas = !(finReservaNueva.isBefore(inicioReservaExistente) || finReservaExistente.isBefore(inicioReservaNueva));
                 if (ocupadas) {
-                    throw new PistaNoDisponibleException("La pista no esta disponible en ese horario.");
+                    return false;
                 }
             }
         }
         reservas.add(r);
         return true;
+    }
+
+    void cancelarReserva(String idReserva){
+        if (!reservas.removeIf(s -> s.getIdReserva().equals(idReserva))){
+            throw new ReservaNoExisteException("La reserva con el id" +idReserva + "que quiere cancelar no existe.");
+        }
     }
     }
 
