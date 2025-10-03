@@ -1,5 +1,7 @@
 package java.modelo;
 
+import java.exceptions.DuracionMinimaException;
+import java.exceptions.PrecioMinimoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -13,14 +15,27 @@ public class Reserva {
     private int duracionMinima;
     private double precio;
 
-    public Reserva(String idReserva, String idSocio, String idPista, LocalDate fecha, LocalTime horaInicio, int duracionMinima, double precio) {
+    /**
+     * Constructor de un objeto reserva.
+     * @param idReserva
+     * @param idSocio
+     * @param idPista
+     * @param fecha
+     * @param horaInicio
+     * @param duracionMinima
+     * @param precio
+     * En el constructor le pasamos todos los datos que desde la interfaz corregiremos
+     * validaremos la duración y el precio con los Setters, los cuales tienen en cuenta
+     * un posible fallo de dato
+     */
+    public Reserva(String idReserva, String idSocio, String idPista, LocalDate fecha, LocalTime horaInicio, int duracionMinima, Double precio) {
         this.idReserva = idReserva;
         this.idSocio = idSocio;
         this.idPista = idPista;
         this.fecha = fecha;
         this.horaInicio = horaInicio;
-        this.duracionMinima = duracionMinima;
-        this.precio = precio;
+        setDuracionMinima(duracionMinima);
+        setPrecio(precio);
     }
 
     public String getIdReserva() {
@@ -36,7 +51,12 @@ public class Reserva {
     }
 
     public void setPrecio(double precio) {
-        this.precio = precio;
+        if (precio <= 0){
+            throw new PrecioMinimoException("El precio no puede ser 0 o menor");
+        }
+        else {
+            this.precio = precio;
+        }
     }
 
     public int getDuracionMinima() {
@@ -44,6 +64,9 @@ public class Reserva {
     }
 
     public void setDuracionMinima(int duracionMinima) {
+        if (duracionMinima < 1 ){
+            throw new DuracionMinimaException("La duración tiene que ser del al menos 1 hora");
+        }
         this.duracionMinima = duracionMinima;
     }
 
