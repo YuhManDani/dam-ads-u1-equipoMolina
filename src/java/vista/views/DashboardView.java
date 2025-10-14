@@ -32,7 +32,7 @@ public class DashboardView extends BorderPane {
         TableColumn<Pista, String> p2 = new TableColumn<>("Deporte");
         p2.setCellValueFactory(p -> new javafx.beans.property.SimpleStringProperty(p.getValue().getDeporte()));
         TableColumn<Pista, String> p3 = new TableColumn<>("Disponible");
-       p3.setCellValueFactory(p -> new javafx.beans.property.SimpleStringProperty(String.valueOf(p.getValue().isDisponible())));
+        p3.setCellValueFactory(p -> new javafx.beans.property.SimpleStringProperty(String.valueOf(p.getValue().getDisponible())));
         tablaPistas.getColumns().addAll(p1, p2, p3);
         tablaPistas.getItems().addAll(club.getPistas());
 

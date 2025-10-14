@@ -21,6 +21,9 @@ public class BajaSocioView extends GridPane {
 
         baja.setOnAction(e -> {
         //LLamar al método del modelo para dar de baja  a un socio.
+            Socio socioSeleccionado = id.getValue();
+            String socioId = socioSeleccionado.getIdSocio();
+            club.bajaSocio(socioId);
         });
     }
 

@@ -28,7 +28,7 @@ public class ClubDeportivo {
      * @return
      */
 
-    boolean altaSocio(Socio socio){
+    public boolean altaSocio(Socio socio){
         for (Socio s : socios){
             if(s.getIdSocio().equals(socio.getIdSocio())){
                 // Si existe socio con ese id, lanzaremos la exception creada.
@@ -46,7 +46,7 @@ public class ClubDeportivo {
      * @throws ReservaPendienteException
      *
      */
-    void bajaSocio(String idSocio){
+    public void bajaSocio(String idSocio){
         for (Reserva r : reservas){
             if (r.getIdSocio().equals(idSocio)){
                 throw new ReservaPendienteException(
@@ -59,7 +59,7 @@ public class ClubDeportivo {
             throw new SocioNoExisteException("No existe un socio con el ID " +idSocio + " así que no hay ningún socio por eliminar.");
         }
     }
-    void altaPista(Pista pista){
+    public void altaPista(Pista pista){
         for (Pista p : pistas){
            if (p.getIdPista().equals(pista.getIdPista())){
                throw new PistaExistenteException("La pista con ID " + pista.getIdPista() + " ya existe");
@@ -68,7 +68,7 @@ public class ClubDeportivo {
             pistas.add(pista);
     }
 
-    void cambiarDisponibilidadPista(String idPista, boolean disponible){
+    public void cambiarDisponibilidadPista(String idPista, boolean disponible){
         for (Pista p : pistas){
             if (p.getIdPista().equals(idPista)){
                 p.setDisponible(disponible);
@@ -80,7 +80,7 @@ public class ClubDeportivo {
         throw new PistaNoExisteException("La pista con el ID " + idPista + " no existe");
     }
 
-    boolean crearReserva(Reserva r) {
+    public boolean crearReserva(Reserva r) {
         for (Reserva reserva : reservas) {
             if (reserva.getIdPista().equals(r.getIdPista()) && reserva.getFecha().equals(r.getFecha())) {
                 LocalTime inicioReservaNueva = r.getHoraInicio();
@@ -98,10 +98,21 @@ public class ClubDeportivo {
         return true;
     }
 
-    void cancelarReserva(String idReserva){
+   public void cancelarReserva(String idReserva){
         if (!reservas.removeIf(s -> s.getIdReserva().equals(idReserva))){
             throw new ReservaNoExisteException("La reserva con el id" +idReserva + "que quiere cancelar no existe.");
         }
     }
+
+    public ArrayList<Socio> getSocios() {return socios; }
+
+    public ArrayList<Pista> getPistas() {
+        return pistas;
+    }
+
+    public ArrayList<Reserva> getReservas() {
+        return reservas;
+    }
+
     }
 

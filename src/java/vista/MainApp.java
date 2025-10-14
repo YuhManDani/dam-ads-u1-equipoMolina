@@ -23,7 +23,8 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         club = new ClubDeportivo();
         try {
-     //      LLamo al método de la lógica para cargar los datos del fichero
+        //LLamo al método de la lógica para cargar los datos del fichero
+
         } catch (Exception e) {
             e.printStackTrace();
         }

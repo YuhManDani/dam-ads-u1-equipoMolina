@@ -20,8 +20,10 @@ public class CancelarReservaView extends GridPane {
 
         cancelar.setOnAction(e -> {
             try {
-         //      club.cancelarReserva(id.getValue());
-
+            //club.cancelarReserva(id.getValue());
+            Reserva reservaSeleccionada = id.getValue();
+            String reservaId = reservaSeleccionada.getIdReserva();
+            club.cancelarReserva(reservaId);
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }

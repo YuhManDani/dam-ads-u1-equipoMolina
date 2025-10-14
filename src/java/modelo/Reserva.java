@@ -59,7 +59,7 @@ public class Reserva {
         }
     }
 
-    public int getDuracionMinima() {
+    public int getDuracionMin() {
         return duracionMinima;
     }
 

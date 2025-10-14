@@ -23,8 +23,10 @@ public class CambiarDisponibilidadView extends GridPane {
 
         cambiar.setOnAction(e -> {
             try {
-          //     club.cambiarDisponibilidadPista(id.getText(), disponible.isSelected());
-
+                //club.cambiarDisponibilidadPista(id.getText(), disponible.isSelected());
+                Pista pistaSeleccionada = id.getValue();
+                String pistaId = pistaSeleccionada.getIdPista();
+                club.cambiarDisponibilidadPista(pistaId, disponible.isSelected());
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }

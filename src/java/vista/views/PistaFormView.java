@@ -28,7 +28,11 @@ public class PistaFormView extends GridPane {
         crear.setOnAction(e -> {
             try {
              //   club.altaPista(new Pista(id.getText(), deporte.getText(), descripcion.getText(), disponible.isSelected()));
-
+                String idPista = id.getText();
+                String deporteElegido = deporte.getText();
+                String descripcionPista = descripcion.getText();
+                Boolean operativa = disponible.isSelected();
+                club.altaPista(new Pista(idPista, operativa, descripcionPista, deporteElegido));
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }

@@ -34,6 +34,7 @@ public class SocioFormView extends GridPane {
             try {
                 boolean ok=true;
                 //   ok= club.altaSocio(new Socio(id.getText(), dni.getText(), nombre.getText(), apellidos.getText(), tel.getText(), email.getText()));
+
                if (ok) showInfo("Socio insertado correctametne");
                 else showError("Socio no inertado correctamente");
             } catch (Exception ex) {
