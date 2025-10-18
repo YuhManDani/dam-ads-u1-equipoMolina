@@ -1,7 +1,11 @@
-package java.vista.views;
+package app.vista.views;
 
-import java.modelo.*;
-import java.servicio.ClubDeportivo;
+import app.modelo.*;
+
+import app.modelo.Pista;
+import app.modelo.Reserva;
+import app.modelo.Socio;
+import app.servicio.ClubDeportivo;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -18,6 +22,14 @@ public class ReservaFormView extends GridPane {
         TextField id = new TextField();
         ComboBox<Socio> idSocio = new ComboBox();
         ComboBox<Pista> idPista = new ComboBox();
+        for (Socio s : club.getSocios()){
+            idSocio.getItems().add(s);
+        }
+
+        for (Pista p : club.getPistas()){
+            idPista.getItems().add(p);
+        }
+
         DatePicker fecha = new DatePicker(LocalDate.now());
         TextField hora = new TextField("10:00");
         Spinner<Integer> duracion = new Spinner<>(30, 300, 60, 30);
@@ -36,9 +48,21 @@ public class ReservaFormView extends GridPane {
         crear.setOnAction(e -> {
             try {
                 LocalTime t = LocalTime.parse(hora.getText());
+                String idReserva = id.getText();
+                String socioId = idSocio.getValue().getIdSocio();
+                String pistaId = idPista.getValue().getIdPista();
+                LocalDate recogerFecha = fecha.getValue();
+                Integer recogerDuracion = duracion.getValue();
+                Double recogerPrecio = Double.parseDouble(precio.getText());
 
-              Reserva r = new Reserva(id.getText(), idSocio.getValue().getIdSocio(), idPista.getValue().getIdPista(),
-                      fecha.getValue(), t, duracion.getValue(), Double.parseDouble(precio.getText()));
+              Reserva r = new Reserva(idReserva, socioId, pistaId, recogerFecha, t, recogerDuracion, recogerPrecio);
+              boolean ok = club.crearReserva(r);
+                if (ok) {
+                showInfo("Reserva realizada correctamente");
+                }
+                else {
+                showError("Error al realizar la reserva");
+                }
            //     boolean ok = club.crearReserva(r);
             } catch (Exception ex) {
                 showError(ex.getMessage());

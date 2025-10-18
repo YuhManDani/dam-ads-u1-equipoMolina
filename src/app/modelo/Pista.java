@@ -1,4 +1,4 @@
-package java.modelo;
+package app.modelo;
 
 public class Pista {
 
@@ -42,8 +42,11 @@ public class Pista {
         return disponible;
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    public void setDisponible(boolean disponible) {this.disponible = disponible;}
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.idPista);
     }
 
 }

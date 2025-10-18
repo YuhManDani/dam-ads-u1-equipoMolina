@@ -1,11 +1,11 @@
-package java.vista.views;
-import java.modelo.*;
-import java.servicio.ClubDeportivo;
+package app.vista.views;
+import app.modelo.*;
+
+import app.modelo.Reserva;
+import app.servicio.ClubDeportivo;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
-import java.util.function.Consumer;
 
 public class CancelarReservaView extends GridPane {
     public CancelarReservaView(ClubDeportivo club) {
@@ -13,6 +13,9 @@ public class CancelarReservaView extends GridPane {
         setHgap(8); setVgap(8);
 
         ComboBox<Reserva> id = new ComboBox();
+        for (Reserva r : club.getReservas()){
+            id.getItems().add(r);
+        }
         Button cancelar = new Button("Cancelar reserva");
 
         addRow(0, new Label("Reserva"), id);
@@ -24,6 +27,7 @@ public class CancelarReservaView extends GridPane {
             Reserva reservaSeleccionada = id.getValue();
             String reservaId = reservaSeleccionada.getIdReserva();
             club.cancelarReserva(reservaId);
+            showInfo("Se ha cancelado la reserva con ID " +id.getValue());
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }

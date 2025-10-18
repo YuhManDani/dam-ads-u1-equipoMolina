@@ -1,9 +1,11 @@
-package java.servicio;
+package app.servicio;
 
-import java.exceptions.*;
-import java.modelo.Pista;
-import java.modelo.Reserva;
-import java.modelo.Socio;
+import app.exceptions.*;
+
+import app.exceptions.*;
+import app.modelo.Pista;
+import app.modelo.Reserva;
+import app.modelo.Socio;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -84,9 +86,9 @@ public class ClubDeportivo {
         for (Reserva reserva : reservas) {
             if (reserva.getIdPista().equals(r.getIdPista()) && reserva.getFecha().equals(r.getFecha())) {
                 LocalTime inicioReservaNueva = r.getHoraInicio();
-                LocalTime finReservaNueva = r.getHoraInicio().plusHours(r.getDuracionMinima());
+                LocalTime finReservaNueva = r.getHoraInicio().plusHours(r.getDuracionMin());
                 LocalTime inicioReservaExistente = reserva.getHoraInicio();
-                LocalTime finReservaExistente = reserva.getHoraInicio().plusHours(reserva.getDuracionMinima());
+                LocalTime finReservaExistente = reserva.getHoraInicio().plusHours(reserva.getDuracionMin());
                 // Aqui hacemos un boolean para ver si las pista a reservar estara ocupada
                 boolean ocupadas = !(finReservaNueva.isBefore(inicioReservaExistente) || finReservaExistente.isBefore(inicioReservaNueva));
                 if (ocupadas) {

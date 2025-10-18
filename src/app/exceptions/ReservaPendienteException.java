@@ -1,4 +1,4 @@
-package java.exceptions;
+package app.exceptions;
 
 public class ReservaPendienteException extends RuntimeException {
     public ReservaPendienteException(String message) {

@@ -1,8 +1,11 @@
-package java.vista;
 
-import java.modelo.*;
-import java.servicio.ClubDeportivo;
-import java.vista.views.*;
+package app.vista;
+
+import app.modelo.*;
+import app.servicio.ClubDeportivo;
+import app.vista.views.*;
+
+import app.vista.views.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -10,8 +13,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.w3c.dom.*;
 
-import java.nio.file.Path;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import app.data.ManejoPersistencia;
 
 public class MainApp extends Application {
 
@@ -24,7 +37,7 @@ public class MainApp extends Application {
         club = new ClubDeportivo();
         try {
         //LLamo al método de la lógica para cargar los datos del fichero
-
+        club = ManejoPersistencia.cargarClubDesdeXML();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,10 +89,9 @@ public class MainApp extends Application {
         Menu archivo = new Menu("Archivo");
         MenuItem guardar = new MenuItem("Guardar");
         guardar.setOnAction(e -> {
+
             try {
-            //    LLamo al método del modelo para guardar los datos en fichero
-
-
+                ManejoPersistencia.guardarEnXML(club);
             } catch (Exception ex) {
                 showError("Error guardando: " + ex.getMessage());
             }
@@ -88,7 +100,9 @@ public class MainApp extends Application {
         salir.setOnAction(e -> {
             try {
                 //Lammo al método del modelo para guardar antes de salir
-            } catch (Exception ignored) {}
+                ManejoPersistencia.guardarEnXML(club);
+            } catch (Exception ignored) {
+            }
             Platform.exit();
         });
         archivo.getItems().addAll(guardar, new SeparatorMenuItem(), salir);

@@ -1,12 +1,12 @@
-package java.vista.views;
+package app.vista.views;
 
-import java.modelo.*;
-import java.servicio.ClubDeportivo;
+import app.modelo.*;
+
+import app.modelo.Socio;
+import app.servicio.ClubDeportivo;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
-import java.util.function.Consumer;
 
 public class SocioFormView extends GridPane {
     public SocioFormView(ClubDeportivo club) {
@@ -33,10 +33,17 @@ public class SocioFormView extends GridPane {
         crear.setOnAction(e -> {
             try {
                 boolean ok=true;
-                //   ok= club.altaSocio(new Socio(id.getText(), dni.getText(), nombre.getText(), apellidos.getText(), tel.getText(), email.getText()));
 
-               if (ok) showInfo("Socio insertado correctametne");
-                else showError("Socio no inertado correctamente");
+                String idSocio = id.getText();
+                String dniSocio = dni.getText();
+                String nombreSocio = nombre.getText();
+                String apellidosSocio = apellidos.getText();
+                String tlfno = tel.getText();
+                String correo = email.getText();
+
+                ok = club.altaSocio(new Socio(idSocio, dniSocio, nombreSocio, apellidosSocio, tlfno, correo));
+               if (ok) showInfo("Socio insertado correctamente");
+                else showError("Socio no insertado correctamente");
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }

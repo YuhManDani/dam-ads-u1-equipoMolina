@@ -1,12 +1,12 @@
-package java.vista.views;
+package app.vista.views;
 
-import java.modelo.*;
-import java.servicio.ClubDeportivo;
+import app.modelo.*;
+
+import app.modelo.Pista;
+import app.servicio.ClubDeportivo;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
-import java.util.function.Consumer;
 
 public class PistaFormView extends GridPane {
     public PistaFormView(ClubDeportivo club) {
@@ -33,6 +33,7 @@ public class PistaFormView extends GridPane {
                 String descripcionPista = descripcion.getText();
                 Boolean operativa = disponible.isSelected();
                 club.altaPista(new Pista(idPista, operativa, descripcionPista, deporteElegido));
+                showInfo("Se ha dado de alta la pista con ID " +id.getText());
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }

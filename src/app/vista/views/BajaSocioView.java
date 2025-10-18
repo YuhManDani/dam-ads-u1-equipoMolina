@@ -1,12 +1,12 @@
-package java.vista.views;
+package app.vista.views;
 
-import java.servicio.ClubDeportivo;
-import java.modelo.*;
+import app.exceptions.ReservaPendienteException;
+import app.modelo.Socio;
+import app.servicio.ClubDeportivo;
+import app.modelo.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
-import java.util.function.Consumer;
 
 public class BajaSocioView extends GridPane {
     public BajaSocioView(ClubDeportivo club) {
@@ -15,6 +15,9 @@ public class BajaSocioView extends GridPane {
 
         ComboBox<Socio> id = new ComboBox<>();
         Button baja = new Button("Dar de baja");
+        for (Socio s : club.getSocios()){
+            id.getItems().add(s);
+        }
 
         addRow(0, new Label("Socio"), id);
         add(baja, 1, 1);
@@ -22,8 +25,19 @@ public class BajaSocioView extends GridPane {
         baja.setOnAction(e -> {
         //LLamar al método del modelo para dar de baja  a un socio.
             Socio socioSeleccionado = id.getValue();
+            if(socioSeleccionado == null){
+                showError("No has seleccionado un socio.");
+            }
             String socioId = socioSeleccionado.getIdSocio();
-            club.bajaSocio(socioId);
+            try {
+                club.bajaSocio(socioId);
+                showInfo("El socio " +socioSeleccionado.getNombre() + " ha sido dado de baja");
+            }catch (ReservaPendienteException ex){
+                showError(ex.getMessage());
+            } catch (Exception ex) {
+                showError("Error: " + ex.getMessage());
+            }
+
         });
     }
 

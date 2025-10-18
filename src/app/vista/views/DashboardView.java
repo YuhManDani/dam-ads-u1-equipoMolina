@@ -1,17 +1,16 @@
-package java.vista.views;
+package app.vista.views;
 
 
-import java.servicio.ClubDeportivo;
+import app.servicio.ClubDeportivo;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
-import java.util.function.Consumer;
-import java.modelo.Socio;
-import java.modelo.Reserva;
-import java.modelo.Pista;
+import app.modelo.Socio;
+import app.modelo.Reserva;
+import app.modelo.Pista;
 public class DashboardView extends BorderPane {
     public DashboardView(ClubDeportivo club) {
         setPadding(new Insets(10));

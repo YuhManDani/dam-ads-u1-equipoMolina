@@ -1,12 +1,11 @@
-package java.vista.views;
+package app.vista.views;
 
-import java.servicio.ClubDeportivo;
-import java.modelo.*;
+import app.modelo.Pista;
+import app.servicio.ClubDeportivo;
+import app.modelo.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-
-import java.util.function.Consumer;
 
 public class CambiarDisponibilidadView extends GridPane {
     public CambiarDisponibilidadView(ClubDeportivo club) {
@@ -15,6 +14,10 @@ public class CambiarDisponibilidadView extends GridPane {
 
         ComboBox<Pista> id = new ComboBox();
         CheckBox disponible = new CheckBox("Disponible");
+        for (Pista p : club.getPistas()){
+            id.getItems().add(p);
+        }
+
         Button cambiar = new Button("Aplicar");
 
         addRow(0, new Label("idPista"), id);
@@ -27,6 +30,13 @@ public class CambiarDisponibilidadView extends GridPane {
                 Pista pistaSeleccionada = id.getValue();
                 String pistaId = pistaSeleccionada.getIdPista();
                 club.cambiarDisponibilidadPista(pistaId, disponible.isSelected());
+                if (disponible.isSelected()){
+                    showInfo("Se ha cambiado la disponibilidad de la pista, ahora esta disponible");
+                }
+                else{
+                    showInfo("Se ha cambiado la disponibilidad de la pista, ahora no esta disponible");
+                }
+
             } catch (Exception ex) {
                 showError(ex.getMessage());
             }
