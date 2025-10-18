@@ -92,6 +92,7 @@ public class MainApp extends Application {
 
             try {
                 ManejoPersistencia.guardarEnXML(club);
+                showInfo("Los datos se han guardado correctamente.");
             } catch (Exception ex) {
                 showError("Error guardando: " + ex.getMessage());
             }
