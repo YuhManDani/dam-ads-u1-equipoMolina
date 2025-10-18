@@ -1,4 +1,4 @@
-package java.exceptions;
+package app.exceptions;
 
 public class ClienteExistenteException extends RuntimeException {
     public ClienteExistenteException(String message) {

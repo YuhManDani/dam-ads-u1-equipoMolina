@@ -1,4 +1,4 @@
-package java.modelo;
+package app.modelo;
 
 public class Socio {
 

@@ -1,4 +1,4 @@
-package java.exceptions;
+package app.exceptions;
 
 public class PrecioMinimoException extends RuntimeException {
     public PrecioMinimoException(String message) {

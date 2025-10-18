@@ -1,4 +1,4 @@
-package java.exceptions;
+package app.exceptions;
 
 public class PistaExistenteException extends RuntimeException {
     public PistaExistenteException(String message) {

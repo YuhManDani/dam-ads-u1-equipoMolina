@@ -1,7 +1,7 @@
-package java.modelo;
+package app.modelo;
 
-import java.exceptions.DuracionMinimaException;
-import java.exceptions.PrecioMinimoException;
+import app.exceptions.DuracionMinimaException;
+import app.exceptions.PrecioMinimoException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
